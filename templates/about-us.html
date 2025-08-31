@@ -1,134 +1,144 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}TheGazette | About Us{% endblock %}
+{% block title %}PulsePre | About Us{% endblock %}
+
+{% block extra_head %}
+    <meta name="description" content="Learn more about PulsePre — your quick, reliable briefing on sports, entertainment, politics, technology, and trending news. Discover our mission, editorial values, and how to connect with us.">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
-    <!-- Breadcrumb Area Start -->
-    <div class="breadcumb-area section_padding_50">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="breacumb-content d-flex align-items-center justify-content-between">
-                        <h3 class="font-pt mb-0">About Us</h3>
-                        <p class="editorial-post-date text-dark mb-0">28 November 2017</p>
-                    </div>
-                </div>
-            </div>
+
+    <!-- Mission Section -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">Our Mission</h2>
+            <p class="text-gray-700 text-lg max-w-3xl mx-auto mb-4">
+                PulsePre exists to help busy readers stay a step ahead. In a world overloaded with information, we curate stories that matter most. Each article is crafted for clarity, speed, and depth, giving you just the right amount of context to understand every headline.
+            </p>
+            <p class="text-gray-700 text-lg max-w-3xl mx-auto">
+                We believe in informed communities, smarter conversations, and empowering readers to make confident decisions based on accurate, verified information. Every update is carefully edited to ensure clarity and trustworthiness.
+            </p>
         </div>
-    </div>
-    <!-- Breadcrumb Area End -->
+    </section>
 
-    <section class="gazette-about-us-area section_padding_100_70">
-        <div class="about-us-content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h3 class="font-pt mb-30">Short History</h3>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam congue placerat finibus. Fusce a enim non erat faucibus pellentesque. Ut mattis vel leo sit amet tincidunt. Sed placerat condimentum ante vitae ornare. Nam nibh leo, pharetra vel lacus in, dictum tincidunt magna. Aliquam ut placerat justo. Duis elementum justo in sapien auctor, ut placerat purus sodales. Pellentesque a risus eu elit scelerisque fermentum in sed nisi. Sed maximus vel lectus sit</p>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <p>amet rhoncus. Vestibulum ut mattis mi, ac aliquam turpis. Suspendisse potenti. In semper nec urna sed mattis. Vivamus augue tellus, placerat nec lectus a, sodales sollicitudin arcu. Aenean a porta sem. In a nunc sapien. Aliquam justo augue, ornare eu mauris varius, scelerisque consequat purus. Ut semper ac neque eu cursus. Cras pellentesque quam vel metus bibendum, ac fringilla tellus tempus.</p>
-                    </div>
+    <!-- What We Cover Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold text-center mb-12">What We Cover</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="p-6 bg-white shadow rounded-2xl">
+                    <h3 class="font-bold text-xl mb-3">Breaking News & Trending</h3>
+                    <p class="text-gray-600">Stay up-to-date with the latest breaking news and trending stories from around the world, delivered quickly and accurately.</p>
                 </div>
-            </div>
-        </div>
-
-        <div class="team-area mt-50">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h3 class="font-pt mb-50">Our Team</h3>
-                    </div>
+                <div class="p-6 bg-white shadow rounded-2xl">
+                    <h3 class="font-bold text-xl mb-3">World Politics</h3>
+                    <p class="text-gray-600">Comprehensive coverage of elections, policy changes, global diplomacy, and political analysis to help you understand world affairs.</p>
                 </div>
-
-                <div class="row">
-                    <div class="col-12 col-sm-6 col-md-3">
-                        <div class="single-team-area">
-                            <img src="{% static 'img/bg-img/t1.jpg' %}" alt="team member">
-                            <div class="team-member-data">
-                                <h4 class="font-pt">Jane Doe</h4>
-                                <div class="team-member-designation-social-info d-flex align-items-center justify-content-between">
-                                    <h5 class="font-pt mb-0">Editor</h5>
-                                    <div class="social-info">
-                                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-3">
-                        <div class="single-team-area">
-                            <img src="{% static 'img/bg-img/t2.jpg' %}" alt="team member">
-                            <div class="team-member-data">
-                                <h4 class="font-pt">Jane Doe</h4>
-                                <div class="team-member-designation-social-info d-flex align-items-center justify-content-between">
-                                    <h5 class="font-pt mb-0">Editor</h5>
-                                    <div class="social-info">
-                                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-3">
-                        <div class="single-team-area">
-                            <img src="{% static 'img/bg-img/t3.jpg' %}" alt="team member">
-                            <div class="team-member-data">
-                                <h4 class="font-pt">Jane Doe</h4>
-                                <div class="team-member-designation-social-info d-flex align-items-center justify-content-between">
-                                    <h5 class="font-pt mb-0">Editor</h5>
-                                    <div class="social-info">
-                                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-3">
-                        <div class="single-team-area">
-                            <img src="{% static 'img/bg-img/t4.jpg' %}" alt="team member">
-                            <div class="team-member-data">
-                                <h4 class="font-pt">Jane Doe</h4>
-                                <div class="team-member-designation-social-info d-flex align-items-center justify-content-between">
-                                    <h5 class="font-pt mb-0">Editor</h5>
-                                    <div class="social-info">
-                                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="p-6 bg-white shadow rounded-2xl">
+                    <h3 class="font-bold text-xl mb-3">Entertainment</h3>
+                    <p class="text-gray-600">Film, TV, music updates, reviews, box office charts, and celebrity news from the entertainment world.</p>
+                </div>
+                <div class="p-6 bg-white shadow rounded-2xl">
+                    <h3 class="font-bold text-xl mb-3">Sports</h3>
+                    <p class="text-gray-600">Live match updates, detailed analysis, player transfers, and expert insights from local and international sports events.</p>
+                </div>
+                <div class="p-6 bg-white shadow rounded-2xl">
+                    <h3 class="font-bold text-xl mb-3">Health & Fitness</h3>
+                    <p class="text-gray-600">Wellness advice, fitness tips, and science-backed health insights to help you live a healthier lifestyle.</p>
+                </div>
+                <div class="p-6 bg-white shadow rounded-2xl">
+                    <h3 class="font-bold text-xl mb-3">Technology</h3>
+                    <p class="text-gray-600">Product launches, AI, cybersecurity updates, startups, gadgets, and practical how-tos for tech enthusiasts.</p>
+                </div>
+                <div class="p-6 bg-white shadow rounded-2xl">
+                    <h3 class="font-bold text-xl mb-3">Lifestyle</h3>
+                    <p class="text-gray-600">Insights into travel, culture, fashion, food, and daily living tips to inspire and enrich your lifestyle.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="gazette-cta-area bg-img background-overlay section_padding_100" style="background-image: url({% static 'img/blog-img/cta.jpg' %});">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-8">
-                    <div class="cta-content text-center">
-                        <h2 class="font-pt">Join Our Team</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porttitor, elit vel pellentesque faucibus, massa ligula rutrum erat, id aliquam orci urna in ante.</p>
-                        <a href="#" class="btn gazette-btn font-pt">Contact Us <i class="fa fa-angle-right"></i></a>
-                    </div>
+    <!-- Editorial Standards Section -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold text-center mb-12">How We Report</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 shadow rounded-2xl">
+                    <h3 class="font-bold text-xl mb-3">Accuracy First</h3>
+                    <p class="text-gray-600">All our content is thoroughly verified using primary sources, official data, and on-record quotes. Accuracy is our top priority, and we strive to maintain trust with our readers at every step.</p>
+                </div>
+                <div class="bg-white p-6 shadow rounded-2xl">
+                    <h3 class="font-bold text-xl mb-3">Clear Labeling</h3>
+                    <p class="text-gray-600">We clearly label news, analysis, opinion, and sponsored content. Readers always know what type of information they are consuming and can make informed judgments.</p>
+                </div>
+                <div class="bg-white p-6 shadow rounded-2xl">
+                    <h3 class="font-bold text-xl mb-3">Human + Smart Tools</h3>
+                    <p class="text-gray-600">While we leverage AI for research and drafting, final publishing decisions are made by editors. Every article is reviewed to ensure quality, readability, and factual accuracy.</p>
+                </div>
+                <div class="bg-white p-6 shadow rounded-2xl">
+                    <h3 class="font-bold text-xl mb-3">Corrections</h3>
+                    <p class="text-gray-600">Errors are addressed transparently and promptly. We document corrections at the end of articles so readers understand the changes and maintain confidence in our reporting.</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">Community & Comments</h2>
+            <p class="text-gray-700 max-w-3xl mx-auto mb-4">
+                Our community is at the heart of PulsePre. We encourage thoughtful discussion, constructive feedback, and sharing perspectives. Your voice matters, but we ask everyone to remain civil and respectful.
+            </p>
+            <p class="text-gray-700 max-w-3xl mx-auto">
+                We moderate comments to maintain a safe and informative environment. Spam, harassment, and off-topic posts are removed to ensure a quality experience for all readers.
+            </p>
+        </div>
+    </section>
+
+    <!-- Advertising & Affiliate Disclosure Section -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">Advertising & Affiliate Disclosure</h2>
+            <p class="text-gray-700 max-w-3xl mx-auto">
+                PulsePre funds its work through display advertisements and, occasionally, affiliate links. If you make a purchase through an affiliate link, we may earn a small commission at no extra cost to you. These partnerships never affect our editorial independence or the integrity of our reporting.
+            </p>
+            <p class="text-gray-700 max-w-3xl mx-auto mt-2">
+                Our goal is to provide transparency and maintain the trust of our readers while supporting the sustainable growth of PulsePre.
+            </p>
+        </div>
+    </section>
+
+    <!-- Partner & Contribute Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-12">Get Involved</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 shadow rounded-2xl">
+                    <h3 class="font-bold text-xl mb-3">Submit a News Tip</h3>
+                    <p class="text-gray-600">Have a lead, story idea, or insight to share? Email <strong>pulsepre@gmail.com</strong> with details, supporting documents, and context. Sensitive tips are handled with utmost confidentiality.</p>
+                </div>
+                <div class="bg-white p-6 shadow rounded-2xl">
+                    <h3 class="font-bold text-xl mb-3">Partner With Us</h3>
+                    <p class="text-gray-600">For brand partnerships, sponsored projects, or event coverage, reach out to <strong>pulsepre@gmail.com</strong>. We value collaborations that align with our editorial standards and audience interests.</p>
+                </div>
+                <div class="bg-white p-6 shadow rounded-2xl">
+                    <h3 class="font-bold text-xl mb-3">Write for PulsePre</h3>
+                    <p class="text-gray-600">We welcome feature pitches, explainers, and data-driven stories. Submit a concise proposal and writing samples to <strong>pulsepre@gmail.com</strong>. Accepted contributors are guided through our editorial process.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">Contact</h2>
+            <p class="text-gray-700 mb-2">Newsroom: <strong>pulsepre@gmail.com</strong></p>
+            <p class="text-gray-700 mb-2">Advertising & Partnerships: <strong>pulsepre@gmail.com</strong></p>
+            <p class="text-gray-700">Corrections & Feedback: <strong>corrections@pulsepre.com</strong></p>
         </div>
     </section>
 {% endblock %}

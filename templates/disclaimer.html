@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}PulsePre | Disclaimer{% endblock %}
+
+{% block extra_head %}
+    <meta name="description" content="Read the PulsePre Disclaimer. Learn about general information, professional advice, external links, advertising & affiliate disclosures, and liability limitations.">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="relative bg-cover bg-center text-white py-24" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url({% static 'img/bg-img/disclaimer-hero.jpg' %});" role="banner">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-serif font-bold mb-4">Disclaimer</h1>
+        </div>
+    </section>
+
+    <!-- Disclaimer Content -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4 max-w-4xl space-y-10">
+
+            <!-- General Information -->
+            <div>
+                <h2 class="text-2xl font-bold mb-4">General Information Only</h2>
+                <p class="text-gray-700 text-lg">
+                    All content on PulsePre, including articles, videos, and graphics, is provided for <strong>general informational purposes only</strong>. While we strive for accuracy, we do not guarantee that the information is always up to date, complete, or error‑free.
+                </p>
+            </div>
+
+            <!-- No Professional Advice -->
+            <div>
+                <h2 class="text-2xl font-bold mb-4">No Professional Advice</h2>
+                <p class="text-gray-700 text-lg">
+                    Content on PulsePre should not be considered as professional advice of any kind (legal, financial, medical, or otherwise). Always seek the advice of qualified professionals regarding specific issues.
+                </p>
+            </div>
+
+            <!-- News, Opinions, and Analysis -->
+            <div>
+                <h2 class="text-2xl font-bold mb-4">News, Opinions, and Analysis</h2>
+                <ul class="list-disc list-inside text-gray-700 text-lg space-y-2">
+                    <li><strong>News articles:</strong> aim to report verified facts.</li>
+                    <li><strong>Analysis and commentary:</strong> reflect the authors’ views and interpretations, not official statements from PulsePre.</li>
+                    <li><strong>Guest contributions and opinion pieces:</strong> are the sole responsibility of their authors.</li>
+                </ul>
+            </div>
+
+            <!-- External Links -->
+            <div>
+                <h2 class="text-2xl font-bold mb-4">External Links</h2>
+                <p class="text-gray-700 text-lg">
+                    PulsePre may contain links to third‑party websites. We are not responsible for the content, accuracy, or practices of those websites. Visiting external links is at your own risk.
+                </p>
+            </div>
+
+            <!-- Advertising & Affiliate Disclosure -->
+            <div>
+                <h2 class="text-2xl font-bold mb-4">Advertising & Affiliate Disclosure</h2>
+                <ul class="list-disc list-inside text-gray-700 text-lg space-y-2">
+                    <li>We display advertising from networks like <strong>Google AdSense</strong> and <strong>Adsterra</strong>. Ads are provided by third parties and may not reflect the views of PulsePre.</li>
+                    <li>Some articles may contain <strong>affiliate links</strong>. If you make a purchase through those links, PulsePre may earn a small commission at no extra cost to you.</li>
+                </ul>
+            </div>
+
+            <!-- Limitation of Liability -->
+            <div>
+                <h2 class="text-2xl font-bold mb-4">Limitation of Liability</h2>
+                <p class="text-gray-700 text-lg">
+                    PulsePre, its editors, writers, and partners are <strong>not liable</strong> for any loss or damage, direct or indirect, arising from the use of this website, reliance on its content, or interaction with third‑party services linked here.
+                </p>
+            </div>
+
+            <!-- Changes to Disclaimer -->
+            <div>
+                <h2 class="text-2xl font-bold mb-4">Changes to This Disclaimer</h2>
+                <p class="text-gray-700 text-lg">
+                    We may update this disclaimer at any time without prior notice. Updates will be posted on this page with a new effective date.
+                </p>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
+                <p class="text-gray-700 text-lg">
+                    For questions about this disclaimer, please contact:
+                </p>
+                <p class="text-gray-700 text-lg mt-2">
+                    <strong>PulsePre Media</strong><br>
+                    Email: <a href="mailto:pulsepre@gmail.com" class="text-blue-600 hover:underline">pulsepre@gmail.com</a><br>
+                    Address: [Your Street & Suite], [City, Postal Code], [Country]
+                </p>
+            </div>
+
+        </div>
+    </section>
+{% endblock %}

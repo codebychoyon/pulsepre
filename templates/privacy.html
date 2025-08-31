@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}PulsePre | Privacy Policy{% endblock %}
+
+{% block extra_head %}
+    <meta name="description" content="Read the PulsePre Privacy Policy. Learn how we collect, use, and protect your personal information when you visit our website.">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="relative bg-cover bg-center text-white py-24" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url({% static 'img/bg-img/privacy-hero.jpg' %});" role="banner">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-serif font-bold mb-4">Privacy Policy</h1>
+        </div>
+    </section>
+
+    <!-- Privacy Policy Content -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4 max-w-4xl space-y-10">
+
+            <!-- Introduction -->
+            <div>
+                <h2 class="text-2xl font-bold mb-4">Introduction</h2>
+                <p class="text-gray-700 text-lg">
+                    At <strong>PulsePre</strong> (pulsepre.com), we value your privacy and are committed to protecting your personal data. This Privacy Policy explains what information we collect, how we use it, and the choices you have.
+                </p>
+            </div>
+
+            <!-- Information We Collect -->
+            <div>
+                <h2 class="text-2xl font-bold mb-4">Information We Collect</h2>
+                <ul class="list-disc list-inside text-gray-700 text-lg space-y-2">
+                    <li><strong>Personal data you provide:</strong> name, email address, or other contact details if you sign up for newsletters, comment, or contact us directly.</li>
+                    <li><strong>Automatically collected data:</strong> IP address, device type, browser, location (approximate), and browsing activity on our site via cookies and analytics tools.</li>
+                    <li><strong>Cookies and tracking:</strong> We use cookies and similar technologies to remember preferences, serve relevant ads, and measure site performance. You can manage or disable cookies in your browser settings.</li>
+                </ul>
+            </div>
+
+            <!-- How We Use Information -->
+            <div>
+                <h2 class="text-2xl font-bold mb-4">How We Use Your Information</h2>
+                <ul class="list-disc list-inside text-gray-700 text-lg space-y-2">
+                    <li>Deliver news, updates, and newsletters you subscribe to.</li>
+                    <li>Personalize content and ads (through partners like Google AdSense, Adsterra, or affiliate networks).</li>
+                    <li>Improve our website performance, usability, and security.</li>
+                    <li>Respond to inquiries, feedback, and user support requests.</li>
+                    <li>Comply with legal obligations.</li>
+                </ul>
+            </div>
+
+            <!-- Sharing Your Information -->
+            <div>
+                <h2 class="text-2xl font-bold mb-4">Sharing Your Information</h2>
+                <p class="text-gray-700 text-lg mb-2">We do not sell your personal data. We may share information with:</p>
+                <ul class="list-disc list-inside text-gray-700 text-lg space-y-2">
+                    <li><strong>Service providers and partners:</strong> who help us operate the website (e.g., hosting, analytics, ad networks).</li>
+                    <li><strong>Legal authorities:</strong> if required to comply with laws or valid legal requests.</li>
+                    <li><strong>Business transfers:</strong> If PulsePre merges, is acquired, or undergoes restructuring, data may be transferred to the new entity.</li>
+                </ul>
+            </div>
+
+            <!-- Advertising & Affiliate Disclosure -->
+            <div>
+                <h2 class="text-2xl font-bold mb-4">Advertising & Affiliate Disclosure</h2>
+                <ul class="list-disc list-inside text-gray-700 text-lg space-y-2">
+                    <li>PulsePre displays ads from networks such as <strong>Google AdSense</strong> and <strong>Adsterra</strong>. These providers may use cookies or device identifiers to serve relevant ads.</li>
+                    <li>We may include affiliate links in our stories. If you purchase through those links, we may earn a small commission at no extra cost to you.</li>
+                </ul>
+            </div>
+
+            <!-- Your Rights -->
+            <div>
+                <h2 class="text-2xl font-bold mb-4">Your Rights</h2>
+                <p class="text-gray-700 text-lg mb-2">Depending on your location, you may have rights over your data, including:</p>
+                <ul class="list-disc list-inside text-gray-700 text-lg space-y-2">
+                    <li>Access to the personal data we hold about you.</li>
+                    <li>Request correction or deletion of your data.</li>
+                    <li>Opt-out of marketing emails by using the unsubscribe link.</li>
+                    <li>Control cookies through your browser or device settings.</li>
+                </ul>
+                <p class="text-gray-700 text-lg mt-2">For EU/EEA and UK users, PulsePre follows the <strong>GDPR</strong> requirements. For California residents, you may have additional rights under <strong>CCPA</strong>.</p>
+            </div>
+
+            <!-- Data Retention -->
+            <div>
+                <h2 class="text-2xl font-bold mb-4">Data Retention</h2>
+                <p class="text-gray-700 text-lg">
+                    We keep your information only as long as necessary to fulfill the purposes outlined in this Privacy Policy, or as required by law.
+                </p>
+            </div>
+
+            <!-- Security -->
+            <div>
+                <h2 class="text-2xl font-bold mb-4">Security</h2>
+                <p class="text-gray-700 text-lg">
+                    We use reasonable technical and organizational measures to protect your data. However, no system is completely secure, and we cannot guarantee absolute security.
+                </p>
+            </div>
+
+            <!-- Third-party Links -->
+            <div>
+                <h2 class="text-2xl font-bold mb-4">Third-party Links</h2>
+                <p class="text-gray-700 text-lg">
+                    PulsePre may link to other websites. We are not responsible for their privacy practices or content.
+                </p>
+            </div>
+
+            <!-- Children’s Privacy -->
+            <div>
+                <h2 class="text-2xl font-bold mb-4">Children’s Privacy</h2>
+                <p class="text-gray-700 text-lg">
+                    PulsePre does not knowingly collect personal information from children under 13 (or under 16 in the EU). If we become aware that such data has been collected, we will delete it promptly.
+                </p>
+            </div>
+
+            <!-- Changes to Policy -->
+            <div>
+                <h2 class="text-2xl font-bold mb-4">Changes to This Policy</h2>
+                <p class="text-gray-700 text-lg">
+                    We may update this Privacy Policy from time to time. Changes will be posted on this page with a new effective date.
+                </p>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
+                <p class="text-gray-700 text-lg">
+                    If you have questions or requests about this Privacy Policy, please contact:
+                </p>
+                <p class="text-gray-700 text-lg mt-2">
+                    <strong>PulsePre Media</strong><br>
+                    Email: <a href="mailto:pulsepre@gmail.com" class="text-blue-600 hover:underline">pulsepre@gmail.com</a><br>
+                    Address: [Your Street & Suite], [City, Postal Code], [Country]
+                </p>
+            </div>
+
+        </div>
+    </section>
+{% endblock %}

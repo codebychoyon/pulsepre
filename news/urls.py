@@ -7,4 +7,6 @@ urlpatterns = [
     path('single-post/', views.single_post, name='single_post'),
     path('about/', views.about, name='about'),
     path('contact/', views.contact, name='contact'),
+    path('disclaimer/', views.disclaimer, name='disclaimer'),
+    path('privacy-policy/', views.privacy_policy, name='privacy-policy'),
 ]

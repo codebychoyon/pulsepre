@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-12 col-md-8">
                     <div class="gazette-heading">
-                        <h4 class="font-bold">Address</h4>
+                        <h4 class="font-bold">Contact Form</h4>
                     </div>
                     <!-- Contact Form -->
                     <form action="#" method="post">
@@ -58,11 +58,34 @@
         </div>
     </section>
 
-    <div id="googleMap"></div>
+    <!-- Leaflet Map -->
+    <div id="leafletMap"></div>
+
+    <style>
+        #leafletMap {
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+    </style>
 {% endblock %}
 
 {% block extra_scripts %}
-    <!-- Google Maps js -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk9KNSL1jTv4MY9Pza6w8DJkpI_nHyCnk"></script>
-    <script src="{% static 'js/map-active.js' %}"></script>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        // Initialize Leaflet map
+        var map = L.map('leafletMap').setView([32.3668, -86.3000], 12); // Montgomery, AL
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        // Add a marker
+        L.marker([32.3668, -86.3000]).addTo(map)
+            .bindPopup('1635 Franklin Street, Montgomery, AL 36104')
+            .openPopup();
+    </script>
 {% endblock %}

@@ -1,498 +1,432 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+{% block title %}TheGazette | {{ post.title|default:"News Article" }}{% endblock %}
 
-    <!-- Title  -->
-    <title>TheGazette - News Magazine HTML5 Template | Single Post</title>
+{% block extra_head %}
+    <meta name="description" content="{{ post.excerpt|default:'Discover breaking news and in-depth stories from TheGazette.' }}">
+    <meta property="og:title" content="{{ post.title|default:'News Article' }}">
+    <meta property="og:description" content="{{ post.excerpt|default:'Discover breaking news and in-depth stories from TheGazette.' }}">
+    <meta property="og:image" content="{{ post.featured_image.url|default:'/static/img/bg-img/hero-news.jpg' }}">
+    <meta property="og:type" content="article">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Theme: Dark header/footer, white content, blue accents */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a1a1a;
+            background: #ffffff;
+            line-height: 1.8;
+        }
+        h1, h2, h3, h4, h5 {
+            font-family: 'Lora', serif;
+            color: #0a1e3a;
+        }
+        a {
+            color: #0057b7;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        a:hover {
+            color: #003d82;
+        }
+        .container {
+            max-width: 1200px;
+            padding: 0 15px;
+            margin: 0 auto;
+        }
+        /* Hero Section */
+        .post-hero {
+            position: relative;
+            height: 500px;
+            margin-bottom: 40px;
+        }
+        .post-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0 0 10px 10px;
+        }
+        .post-hero .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: 30px;
+            color: white;
+        }
+        .post-hero .tag {
+            background: #0057b7;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        .post-hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        .post-hero .meta {
+            font-size: 1rem;
+            color: #e0e0e0;
+        }
+        /* Content Section */
+        .post-content {
+            padding: 50px 0;
+        }
+        .main-article {
+            font-size: 1.1rem;
+        }
+        .main-article p {
+            margin-bottom: 25px;
+        }
+        .main-article img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .main-article blockquote {
+            margin: 40px 0;
+            padding: 25px 30px;
+            background: #f5f8fd;
+            border-left: 5px solid #0057b7;
+            font-style: italic;
+            color: #333;
+            font-size: 1.2rem;
+        }
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+        }
+        .sidebar h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+        .related-post {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .related-post:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+        .related-post img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .related-post h4 {
+            font-size: 1.05rem;
+            margin: 0;
+            line-height: 1.4;
+        }
+        /* Comments Section */
+        .comments-section {
+            padding: 60px 0;
+            background: #f9f9f9;
+            border-top: 1px solid #e0e0e0;
+        }
+        .comments-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+        .comment {
+            display: flex;
+            align-items: flex-start;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.3s ease;
+        }
+        .comment:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .comment img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+        .comment-content h5 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        .comment-content .date {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .reply {
+            margin-left: 60px;
+            background: #f5f8fd;
+        }
+        .comment-form {
+            margin-top: 40px;
+        }
+        .comment-form input, .comment-form textarea {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease;
+        }
+        .comment-form input:focus, .comment-form textarea:focus {
+            border-color: #0057b7;
+            outline: none;
+        }
+        .comment-form button {
+            padding: 12px 40px;
+            background: #0057b7;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .comment-form button:hover {
+            background: #003d82;
+            transform: translateY(-2px);
+        }
+        /* Social Share */
+        .social-share {
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 0.95rem;
+        }
+        .social-share a {
+            font-size: 1.4rem;
+            color: #666;
+        }
+        .social-share a:hover {
+            color: #0057b7;
+            transform: scale(1.1);
+        }
+        /* Ad Boxes */
+        .ad-box {
+            background: #f0f0f0;
+            border: 2px dashed #ccc;
+            text-align: center;
+            color: #555;
+            font-weight: 600;
+            margin: 30px 0;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        .ad-box::after {
+            content: "Advertisement";
+            display: block;
+            font-size: 0.9rem;
+            color: #777;
+            margin-top: 8px;
+        }
+        .ad-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .ad-top { height: 90px; } /* 728x90 */
+        .ad-mid { height: 250px; max-width: 300px; margin-left: auto; margin-right: auto; } /* 300x250 */
+        .ad-sidebar { height: 600px; } /* 300x600 */
+        .ad-after-comments { height: 90px; } /* 728x90 */
+        .ad-footer { height: 250px; } /* 728x250 */
+        /* Responsive */
+        @media (max-width: 992px) {
+            .post-content .row {
+                flex-direction: column;
+            }
+            .sidebar {
+                position: static;
+            }
+            .post-hero {
+                height: 400px;
+            }
+            .post-hero h1 {
+                font-size: 2.2rem;
+            }
+            .main-article img {
+                height: 300px;
+            }
+        }
+        @media (max-width: 576px) {
+            .post-hero {
+                height: 300px;
+            }
+            .post-hero h1 {
+                font-size: 1.8rem;
+            }
+            .post-hero .overlay {
+                padding: 20px;
+            }
+            .main-article img {
+                height: 200px;
+            }
+            .comment img {
+                width: 40px;
+                height: 40px;
+            }
+            .reply {
+                margin-left: 40px;
+            }
+            .social-share a {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+{% endblock %}
 
-    <!-- Favicon  -->
-    <link rel="icon" href="img/core-img/favicon.ico">
-
-    <!-- Core Style CSS -->
-    <link rel="stylesheet" href="css/core-style.css">
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Responsive CSS -->
-    <link href="css/responsive.css" rel="stylesheet">
-
-</head>
-
-<body>
-    <!-- Header Area Start -->
-    <header class="header-area">
-        <div class="top-header">
-            <div class="container h-100">
-                <div class="row h-100 align-items-center">
-                    <!-- Breaking News Area -->
-                    <div class="col-12 col-md-6">
-                        <div class="breaking-news-area">
-                            <h5 class="breaking-news-title">Breaking news</h5>
-                            <div id="breakingNewsTicker" class="ticker">
-                                <ul>
-                                    <li><a href="#">Brexit breakthrough in Brussels comes after week of drama</a></li>
-                                    <li><a href="#">Brexit breakthrough in Brussels</a></li>
-                                    <li><a href="#">Brexit breakthrough in Brussels comes after week of drama</a></li>
-                                    <li><a href="#">Brex comes after week of drama</a></li>
-                                    <li><a href="#">Brexit breakthrough in Bweek of drama</a></li>
-                                    <li><a href="#">Brexit bssels comes after week of drama</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Stock News Area -->
-                    <div class="col-12 col-md-6">
-                        <div class="stock-news-area">
-                            <div id="stockNewsTicker" class="ticker">
-                                <ul>
-                                    <li>
-                                        <div class="single-stock-report">
-                                            <div class="stock-values">
-                                                <span>eur/usd</span>
-                                                <span>1.1862</span>
-                                            </div>
-                                            <div class="stock-index minus-index">
-                                                <h4>0.18</h4>
-                                            </div>
-                                        </div>
-                                        <div class="single-stock-report">
-                                            <div class="stock-values">
-                                                <span>BTC/usd</span>
-                                                <span>15.674.99</span>
-                                            </div>
-                                            <div class="stock-index plus-index">
-                                                <h4>8.60</h4>
-                                            </div>
-                                        </div>
-                                        <div class="single-stock-report">
-                                            <div class="stock-values">
-                                                <span>ETH/usd</span>
-                                                <span>674.99</span>
-                                            </div>
-                                            <div class="stock-index minus-index">
-                                                <h4>13.60</h4>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="single-stock-report">
-                                            <div class="stock-values">
-                                                <span>eur/usd</span>
-                                                <span>1.1862</span>
-                                            </div>
-                                            <div class="stock-index minus-index">
-                                                <h4>0.18</h4>
-                                            </div>
-                                        </div>
-                                        <div class="single-stock-report">
-                                            <div class="stock-values">
-                                                <span>BTC/usd</span>
-                                                <span>15.674.99</span>
-                                            </div>
-                                            <div class="stock-index plus-index">
-                                                <h4>8.60</h4>
-                                            </div>
-                                        </div>
-                                        <div class="single-stock-report">
-                                            <div class="stock-values">
-                                                <span>ETH/usd</span>
-                                                <span>674.99</span>
-                                            </div>
-                                            <div class="stock-index minus-index">
-                                                <h4>13.60</h4>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="single-stock-report">
-                                            <div class="stock-values">
-                                                <span>eur/usd</span>
-                                                <span>1.1862</span>
-                                            </div>
-                                            <div class="stock-index minus-index">
-                                                <h4>3.95</h4>
-                                            </div>
-                                        </div>
-                                        <div class="single-stock-report">
-                                            <div class="stock-values">
-                                                <span>BTC/usd</span>
-                                                <span>15.674.99</span>
-                                            </div>
-                                            <div class="stock-index plus-index">
-                                                <h4>4.78</h4>
-                                            </div>
-                                        </div>
-                                        <div class="single-stock-report">
-                                            <div class="stock-values">
-                                                <span>ETH/usd</span>
-                                                <span>674.99</span>
-                                            </div>
-                                            <div class="stock-index minus-index">
-                                                <h4>11.37</h4>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Middle Header Area -->
-        <div class="middle-header">
-            <div class="container h-100">
-                <div class="row h-100 align-items-center">
-                    <!-- Logo Area -->
-                    <div class="col-12 col-md-4">
-                        <div class="logo-area">
-                            <a href="index.html"><img src="img/core-img/logo.png" alt="logo"></a>
-                        </div>
-                    </div>
-                    <!-- Header Advert Area -->
-                    <div class="col-12 col-md-8">
-                        <div class="header-advert-area">
-                            <a href="#"><img src="img/bg-img/top-advert.png" alt="header-add"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Bottom Header Area -->
-        <div class="bottom-header">
-            <div class="container h-100">
-                <div class="row h-100 align-items-center">
-                    <div class="col-12">
-                        <div class="main-menu">
-                            <nav class="navbar navbar-expand-lg">
-                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#gazetteMenu" aria-controls="gazetteMenu" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i> Menu</button>
-                                <div class="collapse navbar-collapse" id="gazetteMenu">
-                                    <ul class="navbar-nav mr-auto">
-                                        <li class="nav-item active">
-                                            <a class="nav-link" href="#">Today <span class="sr-only">(current)</span></a>
-                                        </li>
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" href="index.html">Home</a>
-                                                <a class="dropdown-item" href="catagory.html">Catagory</a>
-                                                <a class="dropdown-item" href="single-post.html">Single Post</a>
-                                                <a class="dropdown-item" href="about-us.html">About Us</a>
-                                                <a class="dropdown-item" href="contact.html">Contact</a>
-                                            </div>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">Politics</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">Lifestyle</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">Travel</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">Health</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">Entertainment</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">sport</a>
-                                        </li>
-                                    </ul>
-                                    <!-- Search Form -->
-                                    <div class="header-search-form mr-auto">
-                                        <form action="#">
-                                            <input type="search" placeholder="Input your keyword then press enter..." id="search" name="search">
-                                            <input class="d-none" type="submit" value="submit">
-                                        </form>
-                                    </div>
-                                    <!-- Search btn -->
-                                    <div id="searchbtn">
-                                        <i class="fa fa-search" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- Header Area End -->
-
-    <section class="single-post-area">
-        <!-- Single Post Title -->
-        <div class="single-post-title bg-img background-overlay" style="background-image: url(img/bg-img/1.jpg);">
-            <div class="container h-100">
-                <div class="row h-100 align-items-end">
-                    <div class="col-12">
-                        <div class="single-post-title-content">
-                            <!-- Post Tag -->
-                            <div class="gazette-post-tag">
-                                <a href="#">Editorial</a>
-                            </div>
-                            <h2 class="font-pt">Move over, bitcoin.Here comes litecoin</h2>
-                            <p>March 29, 2016</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="single-post-contents">
+{% block content %}
+    <!-- Hero Section -->
+    <section class="post-hero" role="banner">
+        <img src="{{ post.featured_image.url|default:'/static/img/bg-img/hero-news.jpg' }}" alt="{{ post.title }}">
+        <div class="overlay">
             <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-12 col-md-8">
-                        <div class="single-post-text">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum nunc libero, vitae rutrum nunc porta id. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam arcu augue, semper at elementum</p>
-                            <p>nec, cursus nec ante. Vestibulum sed velit scelerisque elit posuere vulputate vel viverra quam. Curabitur laoreet aliquam diam, non mattis arcu feugiat sed. Sed eget pellentesque lacus. Pellentesque in diam vel mauris pretium commodo a ac magna. Suspendisse scelerisque tellus convallis tortor posuere, ut commodo diam blandit. Morbi vel nulla non turpis luctus tempor eu eu urna. Aliquam in lorem a augue mollis volutpat. Nunc iaculis rutrum enim nec viverra. Morbi eleifend metus id tellus luctus, ac porta orci imperdiet.</p>
-                            <p>Morbi efficitur ligula a efficitur mollis. Suspendisse vitae sapien vitae urna eleifend dapibus ut non tortor. In nec metus ac mi ultrices commodo interdum et lacus. Suspendisse potenti. Suspendisse interdum semper dolor nec posuere. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut orci non tortor pretium hendrerit at vel massa. Nunc ut fermentum felis.</p>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="single-post-thumb">
-                            <img src="img/blog-img/24.jpg" alt="">
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-8">
-                        <div class="single-post-text">
-                            <p>Suspendisse scelerisque tellus convallis tortor posuere, ut commodo diam blandit. Morbi vel nulla non turpis luctus tempor eu eu urna. Aliquam in lorem a augue mollis volutpat. Nunc iaculis rutrum enim nec viverra. Morbi eleifend metus id tellus luctus, ac porta orci imperdiet.</p>
-                            <p>Morbi efficitur ligula a efficitur mollis. Suspendisse vitae sapien vitae urna eleifend dapibus ut non tortor. In nec metus ac mi ultrices commodo interdum et lacus. Suspendisse potenti. Suspendisse interdum semper dolor nec posuere. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut orci non tortor pretium hendrerit at vel massa. Nunc ut fermentum felis. </p>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-10">
-                        <div class="single-post-blockquote">
-                            <blockquote>
-                                <h6 class="font-pt mb-0">“Vestibulum nulla diam, sodales sit amet erat vel, mollis iaculis lectus. Suspendisse in rhoncus est. Sed aliquet mauris in efficitur tempor. Proin enim felis, laoreet id viverra at”</h6>
-                            </blockquote>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-8">
-                        <div class="single-post-text">
-                            <p>Suspendisse vitae sapien vitae urna eleifend dapibus ut non tortor. In nec metus ac mi ultrices commodo interdum et lacus. Suspendisse potenti. Suspendisse interdum semper dolor nec posuere. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut orci non tortor pretium hendrerit at vel massa. Nunc ut fermentum felis.</p>
-                        </div>
-                    </div>
+                <a href="#" class="tag">{{ post.category.name|default:"Editorial" }}</a>
+                <h1>{{ post.title|default:"Breaking News: Latest Updates" }}</h1>
+                <div class="meta">
+                    <span>{{ post.created_at|date:"F d, Y"|default:"March 29, 2016" }}</span>
+                    {% if post.author %} | By <a href="{% url 'author_profile' slug=post.author.slug|default:'author' %}">{{ post.author.name|default:"TheGazette Team" }}</a>{% endif %}
+                    | <span>{{ post.read_time|default:"5 min read" }}</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="gazette-post-discussion-area section_padding_100 bg-gray">
+    <!-- Content Section -->
+    <section class="post-content">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-8">
-                    <!-- Comment Area Start -->
-                    <div class="comment_area section_padding_50 clearfix">
-                        <div class="gazette-heading">
-                            <h4 class="font-bold">Discussion</h4>
-                        </div>
-
-                        <ol>
-                            <!-- Single Comment Area -->
-                            <li class="single_comment_area">
-                                <div class="comment-wrapper d-md-flex align-items-start">
-                                    <!-- Comment Meta -->
-                                    <div class="comment-author">
-                                        <img src="img/blog-img/25.jpg" alt="">
-                                    </div>
-                                    <!-- Comment Content -->
-                                    <div class="comment-content">
-                                        <h5>John Doe</h5>
-                                        <span class="comment-date font-pt">December 18, 2017</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum nunc libero, vitae rutrum nunc porta id. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam arcu augue, semper at elementum nec, cursus nec ante.</p>
-                                        <a class="reply-btn" href="#">Reply <i class="fa fa-reply" aria-hidden="true"></i></a>
-                                    </div>
-                                </div>
-                                <ol class="children">
-                                    <li class="single_comment_area">
-                                        <div class="comment-wrapper d-md-flex align-items-start">
-                                            <!-- Comment Meta -->
-                                            <div class="comment-author">
-                                                <img src="img/blog-img/25.jpg" alt="">
-                                            </div>
-                                            <!-- Comment Content -->
-                                            <div class="comment-content">
-                                                <h5>John Doe</h5>
-                                                <span class="comment-date text-muted">December 18, 2017</span>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum nunc libero, vitae rutrum nunc porta id. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam arcu augue, semper at elementum nec, cursus nec ante.</p>
-                                                <a class="reply-btn" href="#">Reply <i class="fa fa-reply" aria-hidden="true"></i></a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ol>
-                            </li>
-                        </ol>
+            <div class="row">
+                <!-- Main Article -->
+                <div class="col-12 col-lg-9 main-article">
+                    <!-- Ad 1: Top Banner (Moved to header.html, included via base.html) -->
+                    {{ post.content|safe|default:"<p>Read the latest in-depth analysis and breaking news from TheGazette.</p>" }}
+                    {% if post.featured_image %}
+                    <img src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+                    {% endif %}
+                    <!-- Ad 2: Mid-Content -->
+                    <div class="ad-box ad-mid">
+                        <a href="{{ ads.mid_content.url|default:'#' }}" aria-label="Mid-Content Ad">
+                            <img src="{{ ads.mid_content.image.url|default:'/static/img/ads/ad-mid-300x250.jpg' }}" alt="Mid-Content Ad">
+                        </a>
                     </div>
-                    <!-- Leave A Comment -->
-                    <div class="leave-comment-area clearfix">
-                        <div class="comment-form">
-                            <div class="gazette-heading">
-                                <h4 class="font-bold">leave a comment</h4>
-                            </div>
-                            <!-- Comment Form -->
-                            <form action="#" method="post">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="contact-name" placeholder="Enter Your Full Name">
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control" id="contact-email" placeholder="Email">
-                                </div>
-                                <div class="form-group">
-                                    <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
-                                </div>
-                                <button type="submit" class="btn leave-comment-btn">SUBMIT <i class="fa fa-angle-right ml-2"></i></button>
-                            </form>
-                        </div>
+                    {% if post.quote %}
+                    <blockquote>{{ post.quote|default:"An insightful quote from the article." }}</blockquote>
+                    {% endif %}
+                    <!-- Social Share -->
+                    <div class="social-share">
+                        <span>Share this article:</span>
+                        <a href="https://pinterest.com/pin/create/button/?url={{ request.build_absolute_uri }}" aria-label="Share on Pinterest"><i class="fa fa-pinterest"></i></a>
+                        <a href="https://linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri }}" aria-label="Share on LinkedIn"><i class="fa fa-linkedin"></i></a>
+                        <a href="https://facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" aria-label="Share on Facebook"><i class="fa fa-facebook"></i></a>
+                        <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title|urlencode }}" aria-label="Share on Twitter"><i class="fa fa-twitter"></i></a>
+                    </div>
+                </div>
+                <!-- Sidebar -->
+                <div class="col-12 col-lg-3 sidebar">
+                    <!-- Ad 3: Sidebar Top -->
+                    <div class="ad-box ad-sidebar">
+                        <a href="{{ ads.sidebar_top.url|default:'#' }}" aria-label="Sidebar Top Ad">
+                            <img src="{{ ads.sidebar_top.image.url|default:'/static/img/ads/ad-sidebar-top-300x600.jpg' }}" alt="Sidebar Top Ad">
+                        </a>
+                    </div>
+                    <!-- Related Posts -->
+                    <h3>More Stories</h3>
+                    {% for related in related_posts %}
+                    <div class="related-post">
+                        <a href="{% url 'single_post' slug=related.slug %}">
+                            <img src="{{ related.featured_image.url|default:'/static/img/bg-img/news-thumb.jpg' }}" alt="{{ related.title }}">
+                            <h4>{{ related.title|truncatechars:50 }}</h4>
+                            <span class="meta">{{ related.created_at|date:"F d, Y" }}</span>
+                        </a>
+                    </div>
+                    {% empty %}
+                    <p>No related stories available.</p>
+                    {% endfor %}
+                    <!-- Ad 4: Sidebar Bottom -->
+                    <div class="ad-box ad-sidebar">
+                        <a href="{{ ads.sidebar_bottom.url|default:'#' }}" aria-label="Sidebar Bottom Ad">
+                            <img src="{{ ads.sidebar_bottom.image.url|default:'/static/img/ads/ad-sidebar-bottom-300x600.jpg' }}" alt="Sidebar Bottom Ad">
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer Area Start -->
-    <footer class="footer-area bg-img background-overlay" style="background-image: url(img/bg-img/4.jpg);">
-        <!-- Top Footer Area -->
-        <div class="top-footer-area section_padding_100_70">
-            <div class="container">
-                <div class="row">
-                    <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <div class="single-footer-widget">
-                            <div class="footer-widget-title">
-                                <h4 class="font-pt">Regions</h4>
-                            </div>
-                            <ul class="footer-widget-menu">
-                                <li><a href="#">U.S.</a></li>
-                                <li><a href="#">Africa</a></li>
-                                <li><a href="#">Americas</a></li>
-                                <li><a href="#">Asia</a></li>
-                                <li><a href="#">China</a></li>
-                                <li><a href="#">Europe</a></li>
-                                <li><a href="#">Middle</a></li>
-                                <li><a href="#">East</a></li>
-                                <li><a href="#">Opinion</a></li>
-                            </ul>
-                        </div>
+    <!-- Comments Section -->
+    <section class="comments-section" role="region" aria-label="Comments">
+        <div class="container">
+            <h2>Discussion ({{ comments.count|default:0 }})</h2>
+            <ol>
+                {% for comment in comments %}
+                <li class="comment">
+                    <img src="{{ comment.author.profile_image.url|default:'/static/img/blog-img/avatar.jpg' }}" alt="{{ comment.author.name|default:'Commenter' }}">
+                    <div class="comment-content">
+                        <h5>{{ comment.author.name|default:"Anonymous" }}</h5>
+                        <span class="date">{{ comment.created_at|date:"F d, Y"|default:"December 18, 2017" }}</span>
+                        <p>{{ comment.content|default:"Join the conversation with your thoughts." }}</p>
+                        <a class="reply-btn" href="#comment-form">Reply <i class="fa fa-reply" aria-hidden="true"></i></a>
                     </div>
-                    <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <div class="single-footer-widget">
-                            <div class="footer-widget-title">
-                                <h4 class="font-pt">Fashion</h4>
+                    {% if comment.replies %}
+                    <ol class="children">
+                        {% for reply in comment.replies %}
+                        <li class="comment reply">
+                            <img src="{{ reply.author.profile_image.url|default:'/static/img/blog-img/avatar.jpg' }}" alt="{{ reply.author.name|default:'Commenter' }}">
+                            <div class="comment-content">
+                                <h5>{{ reply.author.name|default:"Anonymous" }}</h5>
+                                <span class="date">{{ reply.created_at|date:"F d, Y"|default:"December 18, 2017" }}</span>
+                                <p>{{ reply.content|default:"A thoughtful reply to the discussion." }}</p>
                             </div>
-                            <ul class="footer-widget-menu">
-                                <li><a href="#">Election 2016</a></li>
-                                <li><a href="#">Nation</a></li>
-                                <li><a href="#">World</a></li>
-                                <li><a href="#">Our Team</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <div class="single-footer-widget">
-                            <div class="footer-widget-title">
-                                <h4 class="font-pt">Politics</h4>
-                            </div>
-                            <ul class="footer-widget-menu">
-                                <li><a href="#">Business</a></li>
-                                <li><a href="#">Markets</a></li>
-                                <li><a href="#">Tech</a></li>
-                                <li><a href="#">Luxury</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <div class="single-footer-widget">
-                            <div class="footer-widget-title">
-                                <h4 class="font-pt">Featured</h4>
-                            </div>
-                            <ul class="footer-widget-menu">
-                                <li><a href="#">Football</a></li>
-                                <li><a href="#">Golf</a></li>
-                                <li><a href="#">Tennis</a></li>
-                                <li><a href="#">Motorsport</a></li>
-                                <li><a href="#">Horseracing</a></li>
-                                <li><a href="#">Equestrian</a></li>
-                                <li><a href="#">Sailing</a></li>
-                                <li><a href="#">Skiing</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <div class="single-footer-widget">
-                            <div class="footer-widget-title">
-                                <h4 class="font-pt">FAQ</h4>
-                            </div>
-                            <ul class="footer-widget-menu">
-                                <li><a href="#">Aviation</a></li>
-                                <li><a href="#">Business</a></li>
-                                <li><a href="#">Traveller</a></li>
-                                <li><a href="#">Destinations</a></li>
-                                <li><a href="#">Features</a></li>
-                                <li><a href="#">Food/Drink</a></li>
-                                <li><a href="#">Hotels</a></li>
-                                <li><a href="#">Partner Hotels</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                        <div class="single-footer-widget">
-                            <div class="footer-widget-title">
-                                <h4 class="font-pt">+More</h4>
-                            </div>
-                            <ul class="footer-widget-menu">
-                                <li><a href="#">Fashion</a></li>
-                                <li><a href="#">Design</a></li>
-                                <li><a href="#">Architecture</a></li>
-                                <li><a href="#">Arts</a></li>
-                                <li><a href="#">Autos</a></li>
-                                <li><a href="#">Luxury</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                        </li>
+                        {% endfor %}
+                    </ol>
+                    {% endif %}
+                </li>
+                {% empty %}
+                <li>Be the first to comment!</li>
+                {% endfor %}
+            </ol>
+            <!-- Ad 5: After Comments -->
+            <div class="ad-box ad-after-comments">
+                <a href="{{ ads.after_comments.url|default:'#' }}" aria-label="After Comments Ad">
+                    <img src="{{ ads.after_comments.image.url|default:'/static/img/ads/ad-after-comments-728x90.jpg' }}" alt="After Comments Ad">
+                </a>
+            </div>
+            <!-- Comment Form -->
+            <div class="comment-form" id="comment-form">
+                <h3>Share Your Thoughts</h3>
+                <form action="#" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="content" placeholder="Your Comment" rows="5" required></textarea>
+                    <button type="submit">Post Comment</button>
+                </form>
             </div>
         </div>
-
-        <!-- Bottom Footer Area -->
-        <div class="bottom-footer-area">
-            <div class="container h-100">
-                <div class="row h-100 align-items-center justify-content-center">
-                    <div class="col-12">
-                        <div class="copywrite-text">
-                            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Footer Area End -->
-
-    <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="js/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Plugins js -->
-    <script src="js/plugins.js"></script>
-    <!-- Active js -->
-    <script src="js/active.js"></script>
-
-</body>
-
-</html>
+    </section>
+{% endblock %}

@@ -19,3 +19,11 @@ def about(request):
 
 def contact(request):
     return render(request, 'contact.html')
+
+
+def disclaimer(request):
+    return render(request, 'disclaimer.html')
+
+
+def privacy_policy(request):
+    return render(request, 'privacy.html')
